@@ -1,7 +1,6 @@
-# Dockerfile for Dockerikenoya_ros2humble
-# ikenoya haruyuki
-# 2023/11/21: Vr.1.0
-# 2023/12/08: Vr.2.0
+# Dockerfile for dockernoya-ros2-humble
+# Noya_06
+# 20yy/mm/dd: Vr.1.0
 
 # 改変元コピーライト
 # Copyright 2020-2023 Tiryoh<tiryoh@gmail.com>
@@ -15,10 +14,13 @@ FROM ubuntu:22.04
 ARG TARGETPLATFORM
 
 # ラベル
-LABEL maintainer="ikenoya haruyuki"
+LABEL maintainer="Noya_06"
 LABEL version="1.0"
 
 SHELL ["/bin/bash", "-c"]
+
+# USERに追加して非rootユーザで実行
+# RUN groupadd -r postgres && useradd -r -g postgres postgres
 
 # OSのアップデート
 RUN apt-get update -q && \
@@ -27,7 +29,7 @@ RUN apt-get update -q && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-# Ubuntu mateのインストール
+# Ubuntu mate desktopのインストール
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         ubuntu-mate-desktop && \
