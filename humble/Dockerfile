@@ -8,7 +8,7 @@
 # which is released under the Apache-2.0 license.
 
 # ベースイメージの設定
-FROM ubuntu:22.04
+FROM ubuntu:jammy-20230816
 
 # build時にユーザが渡せる変数の定義
 ARG TARGETPLATFORM
@@ -30,16 +30,12 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # Ubuntu mate desktopのインストール
-#RUN apt-get update -q && \
-#    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#        ubuntu-mate-desktop && \
-#    apt-get autoclean && \
-#    apt-get autoremove && \
-#    rm -rf /var/lib/apt/lists/*
-
-RUN apt-get -y install \
-      ubuntu-mate-desktop \
-  && RUN rm /etc/apt/apt.conf.d/docker-clean
+RUN apt-get update -q && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        ubuntu-mate-desktop && \
+    apt-get autoclean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/*
         
 # 各種パッケージの追加
 #RUN apt-get update && \
