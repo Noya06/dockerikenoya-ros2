@@ -39,16 +39,7 @@ RUN apt-get update -q && \
 
 RUN apt-get -y install \
       ubuntu-mate-desktop \
-      tigervnc-standalone-server \
-      expect \
-      fcitx-mozc \
-      fonts-ipafont-gothic \
-      fonts-ipafont-mincho \
-      vim \
-      gvfs-bin \
-      xdg-utils \
-  && echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" | 
-  
+        
 # 各種パッケージの追加
 #RUN apt-get update && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -y \
