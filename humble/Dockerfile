@@ -39,6 +39,7 @@ RUN apt-get update -q && \
 
 RUN apt-get -y install \
       ubuntu-mate-desktop \
+  && RUN rm /etc/apt/apt.conf.d/docker-clean
         
 # 各種パッケージの追加
 #RUN apt-get update && \
