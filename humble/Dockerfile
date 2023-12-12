@@ -1,7 +1,6 @@
 # Dockerfile for dockernoya-ros2-humble
 # Noya_06
 # 20yy/mm/dd: Vr.1.0
-# 変更テスト
 
 # 改変元コピーライト
 # Copyright 2020-2023 Tiryoh<tiryoh@gmail.com>
@@ -31,13 +30,25 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # Ubuntu mate desktopのインストール
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        ubuntu-mate-desktop && \
-    apt-get autoclean && \
-    apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update -q && \
+#    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#        ubuntu-mate-desktop && \
+#    apt-get autoclean && \
+#    apt-get autoremove && \
+#    rm -rf /var/lib/apt/lists/*
 
+RUN apt-get -y install \
+      ubuntu-mate-desktop \
+      tigervnc-standalone-server \
+      expect \
+      fcitx-mozc \
+      fonts-ipafont-gothic \
+      fonts-ipafont-mincho \
+      vim \
+      gvfs-bin \
+      xdg-utils \
+  && echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" | 
+  
 # 各種パッケージの追加
 #RUN apt-get update && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -y \
