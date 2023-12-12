@@ -1,6 +1,7 @@
 # Dockerfile for dockernoya-ros2-humble
 # Noya_06
 # 20yy/mm/dd: Vr.1.0
+# みえてますか～？
 
 # 改変元コピーライト
 # Copyright 2020-2023 Tiryoh<tiryoh@gmail.com>
