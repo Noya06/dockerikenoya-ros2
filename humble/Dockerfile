@@ -30,13 +30,20 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # Ubuntu mate desktopのインストール
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        ubuntu-mate-desktop && \
-    apt-get autoclean && \
-    apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update -q && \
+#    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#        ubuntu-mate-desktop && \
+#    apt-get autoclean && \
+#    apt-get autoremove && \
+#    rm -rf /var/lib/apt/lists/*
         
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo \
+    && useradd -m user && echo "user:user" | chpasswd && adduser user sudo \
+    && sudo -u user bash -c "sudo apt-get install -y ubuntu-mate-desktop" \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && userdel -r user
 # 各種パッケージの追加
 #RUN apt-get update && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -y \
