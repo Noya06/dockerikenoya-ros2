@@ -100,10 +100,6 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 RUN rosdep update
 
-# Gazeboのインストール
-#RUN apt-get install -y gazebo \
-#    ros-humble-gazebo-*
-
 # エントリーポイントを設定
 COPY ./entrypoint.sh /
 #RUN chmod +x /entrypoint.sh
