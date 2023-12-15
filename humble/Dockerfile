@@ -2,15 +2,11 @@
 # Noya_06
 # 2023/12/14: Vr.1.0
 
-# 改変元コピーライト
-# Copyright 2020-2023 Tiryoh<tiryoh@gmail.com>
-# https://github.com/AtsushiSaito/docker-ubuntu-sweb
-# which is released under the Apache-2.0 license.
 
 # ベースイメージの設定
 FROM ubuntu:jammy-20230816
 
-# build時にユーザが渡せる変数の定義
+# ビルド時の引数の定義(ホストマシンのOSに応じたイメージの構築が可能)
 ARG TARGETPLATFORM
 
 # ラベル
@@ -28,8 +24,7 @@ RUN apt-get update -q && \
 
 # Ubuntu mate desktopのインストール
 RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        ubuntu-mate-desktop && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y ubuntu-mate-desktop && \
     apt-get autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
@@ -84,7 +79,7 @@ RUN wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/p
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-# ROS2のインストール
+# ROS2humbleのインストール
 ENV ROS_DISTRO humble
 ARG INSTALL_PACKAGE=desktop
 RUN apt-get update -q && \
@@ -100,8 +95,16 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 RUN rosdep update
 
+# gazeboのインストール
+RUN apt-get update -q && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libgazebo* \
+    apt-get autoclean && \
+    apt-get autoremove && \
+    && rm -rf /var/lib/apt/lists/*
+
 # エントリーポイントを設定
 COPY ./entrypoint.sh /
+
 #RUN chmod +x /entrypoint.sh
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
 
